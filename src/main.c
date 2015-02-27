@@ -6,16 +6,17 @@
 /*   By: nsierra- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 20:43:53 by nsierra-          #+#    #+#             */
-/*   Updated: 2015/02/27 20:46:13 by nsierra-         ###   ########.fr       */
+/*   Updated: 2015/02/27 20:51:16 by nsierra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include "libft.h"
 
-int		main(int ac, char **av)
+int				main(int ac, char **av)
 {
 	(void)ac;
 	(void)av;
-	write(1, "lel", 3);
+	ft_putendl("lel");
 	return (0);
 }
