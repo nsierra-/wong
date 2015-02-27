@@ -6,10 +6,11 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 20:43:53 by nsierra-          #+#    #+#             */
-/*   Updated: 2015/02/27 21:52:27 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/02/27 23:09:02 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <time.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include "libft.h"
@@ -17,10 +18,10 @@
 
 static int		build_map(t_2048 *game)
 {
-	uint	x;
-	uint	y;
+	t_uint	x;
+	t_uint	y;
 
-	game->map = malloc(sizeof(uint*) * game->height);
+	game->map = malloc(sizeof(t_uint*) * game->height);
 
 	if (!game->map)
 		return (return_error(R_E_MALLOC));
@@ -28,7 +29,7 @@ static int		build_map(t_2048 *game)
 	y = 0;
 	while (y < game->height)
 	{
-		game->map[y] = malloc(sizeof(uint) * game->width);
+		game->map[y] = malloc(sizeof(t_uint) * game->width);
 
 		if (!game->map[y])
 			return (return_error(R_E_MALLOC));
@@ -55,22 +56,26 @@ static t_2048	*game_init(int ac, char **av)
 	game->win_value = DEFAULT_WIN_VALUE;
 	game->score = 0;
 	game->move_count = 0;
+	game->seed = time(NULL);
+	game->base = DEFAULT_BASE;
 
 	if (build_map(game))
 		return (NULL);
 
-	ncurses_handling(init);
+	// ncurses_handling(init);
 
 	(void) ac;
 	(void) av;
 
+	srand(game->seed);
+
 	return (game);
 }
 
-static void		game_end(void)
-{
-	ncurses_handling(end);
-}
+// static void		game_end(void)
+// {
+// 	ncurses_handling(end);
+// }
 
 int				main(int ac, char **av)
 {
@@ -84,8 +89,10 @@ int				main(int ac, char **av)
 		return (EXIT_FAILURE);
 	}
 
+	game_start(game);
 	print_map(game);
 
-	game_end();
-	return (0);
+	// game_end();
+
+	return (EXIT_SUCCESS);
 }

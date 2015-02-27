@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 21:22:19 by amaurer           #+#    #+#             */
-/*   Updated: 2015/02/27 21:39:33 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/02/27 23:15:28 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int        return_error(int error_code)
 
 void		print_map(t_2048 *game)
 {
-	uint	x;
-	uint	y;
+	t_uint	x;
+	t_uint	y;
 
 	y = 0;
 	while (y < game->height)
@@ -39,4 +39,5 @@ void		print_map(t_2048 *game)
 		ft_putchar('\n');
 		y++;
 	}
+	ft_putchar('\n');
 }
