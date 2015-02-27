@@ -6,14 +6,15 @@
 #    By: nsierra- <nsierra-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/03/02 08:22:33 by nsierra-          #+#    #+#              #
-#    Updated: 2015/02/27 20:46:44 by nsierra-         ###   ########.fr        #
+#    Updated: 2015/02/27 21:07:31 by nsierra-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	game_2048
 
 INC_FILES	=	
-SRC_FILES	=	main.c
+SRC_FILES	=	main.c \
+				ncurses_handling.c
 
 SRC			=	$(addprefix src/, $(SRC_FILES))
 INC			=	$(addprefix inc/, $(INC_FILES))
