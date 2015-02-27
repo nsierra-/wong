@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 21:22:19 by amaurer           #+#    #+#             */
-/*   Updated: 2015/02/27 21:39:33 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/02/27 22:50:31 by nsierra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,22 @@ void		print_map(t_2048 *game)
 		ft_putchar('\n');
 		y++;
 	}
+}
+
+static void	print_game_value(char *title, uint val)
+{
+	ft_putstr(title);
+	ft_putnbr(val);
+	ft_putendl("");
+}
+
+void		print_game(t_2048 *game)
+{
+	print_game_value("width: ", game->width);
+	print_game_value("height: ", game->height);
+	print_game_value("score: ", game->score);
+	print_game_value("win value: ", game->win_value);
+	print_game_value("move_count: ", game->move_count);
+	print_game_value("seed: ", game->seed);
+	print_game_value("base: ", game->base);
 }
