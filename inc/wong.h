@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 20:43:20 by nsierra-          #+#    #+#             */
-/*   Updated: 2015/02/28 00:53:01 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/02/28 01:08:14 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void		print_map(t_2048 *game);
 
 int			game_start(t_2048 *game);
 int			spawn_value(t_2048 *game, t_uint x, t_uint y, t_uint value);
+t_uint		slide_line_right(t_uint *line, int index);
 
 void		move_left(t_2048 *game);
 void		move_right(t_2048 *game);

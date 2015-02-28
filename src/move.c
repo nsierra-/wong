@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 22:45:19 by amaurer           #+#    #+#             */
-/*   Updated: 2015/02/28 00:52:15 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/02/28 01:13:24 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <libft.h>
 #include <stdio.h>
 
-int		next_number_index(t_uint *line, int length)
+static int		next_number_index(t_uint *line, int length)
 {
 	while (length >= 0)
 	{
@@ -26,76 +26,58 @@ int		next_number_index(t_uint *line, int length)
 	return (-1);
 }
 
-t_uint	slide_line(t_uint *line, int index)
+static t_uint	slide_line_right_0(t_uint *line, int index)
 {
-	int		result;
+	int	result;
 
-	printf("Index %u\n", index);
+	result = next_number_index(line, index - 1);
 
-	if (index < 0)
-	{
-		printf("Stop\n");
+	if (result == -1)
 		return (-1);
-	}
 
-	if (line[index] == 0)
+	line[index] = line[result];
+	line[result] = 0;
+
+	return (slide_line_right(line, index));
+}
+
+static t_uint	slide_line_right_1(t_uint *line, int index)
+{
+	int	result;
+
+	result = next_number_index(line, index - 1);
+
+	if (result == -1)
+		return (-1);
+	if (line[result] == line[index])
 	{
-		printf("Zero\n");
-		result = next_number_index(line, index - 1);
-
-		if (result == -1)
-			return (-1);
-
-		line[index] = line[result];
+		line[index] += line[result];
 		line[result] = 0;
-		return slide_line(line, index);
 	}
 	else
 	{
-		printf("Non zero\n");
-		result = next_number_index(line, index - 1);
+		line[index - 1] = line[result];
 
-		if (result == -1)
-			return (-1);
-
-		if (line[result] == line[index])
-		{
-			printf("    Equal with %u\n", result);
-			line[index] += line[result];
+		if (index - 1 != result)
 			line[result] = 0;
-		}
-		else
-		{
-			printf("    Not equal with %u\n", result);
-			line[index - 1] = line[result];
-
-			if (index - 1 != result)
-				line[result] = 0;
-		}
-
-		return slide_line(line, index - 1);
 	}
 
-	return (-1);
+	return (slide_line_right(line, index - 1));
 }
 
-void	move_right(t_2048 *game)
+t_uint		slide_line_right(t_uint *line, int index)
 {
-	// t_uint	start;
-	// t_uint	end;
-	// t_uint	x;
-	// t_uint	y;
+	if (index < 0)
+		return (-1);
 
-	// start = 0;
-	// end = game->width;
-	// x = start;
+	if (line[index] == 0)
+		return slide_line_right_0(line, index);
+	else
+		return slide_line_right_1(line, index);
 
-	// y = 0;
-	// while (y < game->height)
-	// {
-	// 	slide_line(game->map[y], game->width);
-	// 	y++;
-	// }
+}
 
-	slide_line(game->map[0], game->width - 1);
+void		move_right(t_2048 *game)
+{
+	slide_line_right(game->map[0], game->width - 1);
 }
