@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 20:43:53 by nsierra-          #+#    #+#             */
-/*   Updated: 2015/02/27 22:52:58 by nsierra-         ###   ########.fr       */
+/*   Updated: 2015/02/27 23:10:35 by nsierra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static t_2048	*game_init(int ac, char **av)
 	game->win_value = DEFAULT_WIN_VALUE;
 	game->score = 0;
 	game->move_count = 0;
+	game->running = 1;
 
 	if (parse_options(game, ac, av))
 		return (NULL);
@@ -62,7 +63,7 @@ static t_2048	*game_init(int ac, char **av)
 	if (build_map(game))
 		return (NULL);
 
-	/* ncurses_handling(init); */
+	ncurses_handling(init);
 
 	(void) ac;
 	(void) av;
@@ -88,7 +89,7 @@ int				main(int ac, char **av)
 	}
 
 	print_map(game);
-
+	game_loop(game);
 	game_end();
 	return (0);
 }

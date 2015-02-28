@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 20:43:20 by nsierra-          #+#    #+#             */
-/*   Updated: 2015/02/27 22:52:42 by nsierra-         ###   ########.fr       */
+/*   Updated: 2015/02/27 23:57:24 by nsierra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,36 @@ typedef struct			s_2048
 	uint				move_count;
 	uint				seed;
 	uint				base;
+	int					running;
 }						t_2048;
+
+typedef struct			s_draw_infos
+{
+	int					valid;
+	int					max_case_height;
+	int					max_case_width;
+	int					max_number_size;
+}						t_draw_infos;
 
 typedef enum			e_ncurses_action
 {
 	init,
-	end
+	end,
+	refresh_screen
 }						t_ncurses_action;
 
 void		ncurses_handling(t_ncurses_action action);
+int			ncurses_handle_input(void);
+
+void		get_max_case_size(t_2048 *game, t_draw_infos *infos);
+void		get_max_number_size(t_2048 *game);
+int			is_valid(t_draw_infos *infos);
+
 int			return_error(int error_code);
 void		print_map(t_2048 *game);
 void		print_game(t_2048 *game);
+
+void		game_loop(t_2048 *game);
 
 int			parse_options(t_2048 *game, int ac, char **av);
 
