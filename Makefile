@@ -6,7 +6,7 @@
 #    By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/03/02 08:22:33 by nsierra-          #+#    #+#              #
-#    Updated: 2015/02/27 22:45:38 by amaurer          ###   ########.fr        #
+#    Updated: 2015/02/28 23:20:21 by amaurer          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,10 @@ SRC_FILES	=	main.c \
 				ncurses_handling.c \
 				util.c \
 				game.c \
-				move.c
+				move_right.c \
+				move_left.c \
+				move_up.c \
+				move_down.c
 
 SRC			=	$(addprefix src/, $(SRC_FILES))
 INC			=	$(addprefix inc/, $(INC_FILES))

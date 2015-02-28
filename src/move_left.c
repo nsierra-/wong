@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move.c                                             :+:      :+:    :+:   */
+/*   move_left.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 22:45:19 by amaurer           #+#    #+#             */
-/*   Updated: 2015/02/28 01:13:24 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/02/28 23:27:52 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,22 @@
 #include <libft.h>
 #include <stdio.h>
 
-static int		next_number_index(t_uint *line, int length)
+static int		next_number_index(int *line, int index, int length)
 {
-	while (length >= 0)
+	while (index < length)
 	{
-		if (line[length] != 0)
-			return (length);
-		length--;
+		if (line[index] != 0)
+			return (index);
+		index++;
 	}
-
 	return (-1);
 }
 
-static t_uint	slide_line_right_0(t_uint *line, int index)
+static int	slide_line_0(int *line, int index, int length)
 {
 	int	result;
 
-	result = next_number_index(line, index - 1);
+	result = next_number_index(line, index + 1, length);
 
 	if (result == -1)
 		return (-1);
@@ -38,14 +37,14 @@ static t_uint	slide_line_right_0(t_uint *line, int index)
 	line[index] = line[result];
 	line[result] = 0;
 
-	return (slide_line_right(line, index));
+	return (slide_line_left(line, index, length));
 }
 
-static t_uint	slide_line_right_1(t_uint *line, int index)
+static int	slide_line_1(int *line, int index, int length)
 {
 	int	result;
 
-	result = next_number_index(line, index - 1);
+	result = next_number_index(line, index + 1, length);
 
 	if (result == -1)
 		return (-1);
@@ -56,28 +55,34 @@ static t_uint	slide_line_right_1(t_uint *line, int index)
 	}
 	else
 	{
-		line[index - 1] = line[result];
+		line[index + 1] = line[result];
 
-		if (index - 1 != result)
+		if (index + 1 != result)
 			line[result] = 0;
 	}
 
-	return (slide_line_right(line, index - 1));
+	return (slide_line_left(line, index + 1, length));
 }
 
-t_uint		slide_line_right(t_uint *line, int index)
+int		slide_line_left(int *line, int index, int length)
 {
-	if (index < 0)
+	if (index >= length)
 		return (-1);
 
 	if (line[index] == 0)
-		return slide_line_right_0(line, index);
+		return slide_line_0(line, index, length);
 	else
-		return slide_line_right_1(line, index);
-
+		return slide_line_1(line, index, length);
 }
 
-void		move_right(t_2048 *game)
+void		move_left(t_2048 *game)
 {
-	slide_line_right(game->map[0], game->width - 1);
+	int	i;
+
+	i = 0;
+	while (i < game->height)
+	{
+		slide_line_left(game->map[i], 0, game->width);
+		i++;
+	}
 }

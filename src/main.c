@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 20:43:53 by nsierra-          #+#    #+#             */
-/*   Updated: 2015/02/27 23:09:02 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/02/28 23:32:36 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 
 static int		build_map(t_2048 *game)
 {
-	t_uint	x;
-	t_uint	y;
+	int	x;
+	int	y;
 
-	game->map = malloc(sizeof(t_uint*) * game->height);
+	game->map = malloc(sizeof(int*) * game->height);
 
 	if (!game->map)
 		return (return_error(R_E_MALLOC));
@@ -29,7 +29,7 @@ static int		build_map(t_2048 *game)
 	y = 0;
 	while (y < game->height)
 	{
-		game->map[y] = malloc(sizeof(t_uint) * game->width);
+		game->map[y] = malloc(sizeof(int) * game->width);
 
 		if (!game->map[y])
 			return (return_error(R_E_MALLOC));

@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 22:00:44 by amaurer           #+#    #+#             */
-/*   Updated: 2015/02/28 00:52:59 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/02/28 23:34:08 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <libft.h>
 
-int		spawn_value(t_2048 *game, t_uint x, t_uint y, t_uint value)
+int		spawn_value(t_2048 *game, int x, int y, int value)
 {
 	if (x >= game->width || y >= game->height)
 		return (return_error(R_E_BAD_COORD));
@@ -24,11 +24,11 @@ int		spawn_value(t_2048 *game, t_uint x, t_uint y, t_uint value)
 	return (R_SUCCESS);
 }
 
-// static t_uint	get_free_block_count(t_2048 *game)
+// static int	get_free_block_count(t_2048 *game)
 // {
-// 	t_uint	y;
-// 	t_uint	x;
-// 	t_uint	i;
+// 	int	y;
+// 	int	x;
+// 	int	i;
 
 // 	i = 0;
 // 	y = 0;
@@ -47,13 +47,13 @@ int		spawn_value(t_2048 *game, t_uint x, t_uint y, t_uint value)
 // 	return (i);
 // }
 
-// static t_uint	**get_free_blocks(t_2048 *game, t_uint *i)
+// static int	**get_free_blocks(t_2048 *game, int *i)
 // {
-// 	t_uint	**blocks;
-// 	t_uint	y;
-// 	t_uint	x;
+// 	int	**blocks;
+// 	int	y;
+// 	int	x;
 
-// 	blocks = malloc(sizeof(t_uint*) * get_free_block_count(game) + 1);
+// 	blocks = malloc(sizeof(int*) * get_free_block_count(game) + 1);
 
 // 	*i = 0;
 // 	y = 0;
@@ -64,7 +64,7 @@ int		spawn_value(t_2048 *game, t_uint x, t_uint y, t_uint value)
 // 		{
 // 			if (game->map[y][x] == 0)
 // 			{
-// 				blocks[*i] = malloc(sizeof(t_uint) * 2);
+// 				blocks[*i] = malloc(sizeof(int) * 2);
 // 				blocks[*i][0] = x;
 // 				blocks[*i][1] = y;
 // 				(*i)++;
@@ -81,11 +81,11 @@ int		spawn_value(t_2048 *game, t_uint x, t_uint y, t_uint value)
 
 // static int	spawn_randomly(t_2048 *game)
 // {
-// 	t_uint	value;
-// 	t_uint	i;
-// 	t_uint	**blocks;
-// 	t_uint	random;
-// 	t_uint	j;
+// 	int	value;
+// 	int	i;
+// 	int	**blocks;
+// 	int	random;
+// 	int	j;
 
 // 	if (rand() % 3 != 0)
 // 		value = game->base;
@@ -113,14 +113,14 @@ int		game_start(t_2048 *game)
 {
 	// spawn_randomly(game);
 	// spawn_randomly(game);
-	spawn_value(game, 0, 0, 3);
-	spawn_value(game, 1, 0, 3);
-	spawn_value(game, 2, 0, 3);
-	spawn_value(game, 3, 0, 3);
+	spawn_value(game, 0, 0, 4);
+	spawn_value(game, 0, 1, 4);
+	spawn_value(game, 0, 2, 4);
+	spawn_value(game, 0, 3, 4);
 
 	print_map(game);
 
-	move_right(game);
+	move_up(game);
 
 	return (R_SUCCESS);
 }
