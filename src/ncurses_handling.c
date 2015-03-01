@@ -19,6 +19,7 @@ void		ncurses_resize(int sigwinch)
 	(void)sigwinch;
 	ncurses_handling(end);
 	ncurses_handling(init);
+	waddstr(stdscr, "Press any key...");
 }
 
 void		ncurses_handling(t_ncurses_action action)
