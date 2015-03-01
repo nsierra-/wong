@@ -6,18 +6,19 @@
 /*   By: nsierra- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 23:38:17 by nsierra-          #+#    #+#             */
-/*   Updated: 2015/02/28 00:02:44 by nsierra-         ###   ########.fr       */
+/*   Updated: 2015/02/28 22:50:29 by nsierra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ncurses.h>
+#include "libft.h"
 #include "wong.h"
 
-static int	get_number_size(uint num)
+int	get_number_size(uint num)
 {
 	int		ret;
 
-	ret = 0;
+	ret = 1;
 	while (num > 0)
 	{
 		num /= 10;
@@ -26,7 +27,7 @@ static int	get_number_size(uint num)
 	return (ret);
 }
 
-void		get_max_case_size(t_2048 *game, t_draw_infos *infos)
+void		set_max_case_size(t_2048 *game, t_draw_infos *infos)
 {
 	infos->max_case_width = COLS / game->width;
 	if (LINES > 1)
@@ -35,24 +36,37 @@ void		get_max_case_size(t_2048 *game, t_draw_infos *infos)
 		infos->max_case_height = 0;
 }
 
-void		get_max_number_size(t_2048 *game)
+void		set_max_number_size(t_2048 *game, t_draw_infos *infos)
 {
 	uint	x;
 	uint	y;
 	int		tmp;
-	int		ret;
 
 	y = 0;
-	ret = 0;
+	infos->max_number_size = 0;
 	while (y < game->height)
 	{
 		x = 0;
 		while (x < game->width)
 		{
 			tmp = get_number_size(game->map[y][x]);
-			ret = tmp > ret ? tmp : ret;
+			infos->max_number_size = tmp > infos->max_number_size ? tmp : infos->max_number_size;
 			x++;
 		}
 		y++;
 	}
+	infos->max_number_size = 1;
 }
+
+void		set_case_spaces(t_2048 *game, t_draw_infos *infos)
+{
+	(void)game;
+	infos->case_hspace = (infos->max_case_width - infos->max_number_size - 2) / 2;
+	infos->case_vspace = (infos->max_case_height - 3) / 2;
+}
+
+/*
+
+(MAX - 1 - 2) / 2
+
+*/

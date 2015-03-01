@@ -6,11 +6,12 @@
 /*   By: nsierra- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 23:09:08 by nsierra-          #+#    #+#             */
-/*   Updated: 2015/02/27 23:44:08 by nsierra-         ###   ########.fr       */
+/*   Updated: 2015/02/28 23:18:28 by nsierra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ncurses.h>
+#include "libft.h"
 #include "wong.h"
 
 static void	game_update(t_2048 *game, int ch)
@@ -27,20 +28,17 @@ static void	game_update(t_2048 *game, int ch)
 		move_right(game);
 }
 
-static void	print_resize_message(void)
-{
-	
-}
-
 static void	game_draw(t_2048 *game)
 {
 	t_draw_infos	infos;
-	
-	(void)game;
-	get_max_case_size(game, &infos);
-	get_max_number_size(game, &infos);
-	if (!is_valid(&infos))
-		print_resize_message();
+
+	wrefresh(stdscr);
+	set_max_case_size(game, &infos);
+	set_max_number_size(game, &infos);
+	set_case_spaces(game, &infos);
+	//is_valid(&infos);
+	draw_map(game, &infos);
+	draw_stats(game);
 }
 
 void		game_loop(t_2048 *game)

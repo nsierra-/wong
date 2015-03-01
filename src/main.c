@@ -64,6 +64,7 @@ static t_2048	*game_init(int ac, char **av)
 		return (NULL);
 
 	ncurses_handling(init);
+	ncurses_handling(set_signal);
 
 	(void) ac;
 	(void) av;

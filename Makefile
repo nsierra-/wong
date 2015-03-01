@@ -6,7 +6,7 @@
 #    By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/03/02 08:22:33 by nsierra-          #+#    #+#              #
-#    Updated: 2015/02/27 22:10:01 by nsierra-         ###   ########.fr        #
+#    Updated: 2015/02/28 22:47:19 by nsierra-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,12 @@ INC_FILES	=
 SRC_FILES	=	main.c \
 				ncurses_handling.c \
 				util.c \
-				parse_options.c
+				parse_options.c \
+				game_loop.c \
+				draw_utils.c \
+				ADL.c \
+				draw_map.c \
+				draw_stats.c
 
 SRC			=	$(addprefix src/, $(SRC_FILES))
 INC			=	$(addprefix inc/, $(INC_FILES))
