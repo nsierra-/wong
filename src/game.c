@@ -87,7 +87,7 @@ int	spawn_randomly(t_2048 *game)
 	int	random;
 	int	j;
 
-	if (rand() % 3 != 0)
+	if (rand() % 6 != 0)
 		value = game->base;
 	else
 		value = game->base * game->base;

@@ -57,9 +57,12 @@ static void	draw_number_line(int x, int y, int value, t_draw_infos *infos)
 	i = 0;
 	while (i++ < infos->case_hspace)
 		waddch(stdscr, ' ');
-	tmp = ft_itoa(value);
-	waddstr(stdscr, tmp);
-	free(tmp);
+	if (value > 0)
+	{
+		tmp = ft_itoa(value);
+		waddstr(stdscr, tmp);
+		free(tmp);
+	}
 	i = 0;
 	j = infos->max_number_size - get_number_size(value);
 	while (i++ < (infos->case_hspace + j))

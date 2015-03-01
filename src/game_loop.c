@@ -36,7 +36,8 @@ static void	game_draw(t_2048 *game)
 {
 	t_draw_infos	infos;
 
-	wrefresh(stdscr);
+	refresh();
+	clear();
 	set_max_case_size(game, &infos);
 	set_max_number_size(game, &infos);
 	set_case_spaces(game, &infos);

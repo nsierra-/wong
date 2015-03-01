@@ -111,6 +111,7 @@ int		get_last_highscore(void)
 	char	*tmp;
 	int		fd;
 	int		score;
+	int		i;
 
 	fd = open(HIGHSCORES_FILE, O_RDONLY);
 
@@ -118,17 +119,22 @@ int		get_last_highscore(void)
 		return (0);
 
 	tmp = NULL;
+	i = 0;
 	while (get_next_line(fd, &line) > 0)
 	{
 		if (!tmp)
 			free(tmp);
 		tmp = line;
+		i++;
 	}
 
 	close(fd);
 
 	score = ft_atoi(tmp);
 	free(tmp);
+
+	if (i < HIGHSCORES_COUNT)
+		return (0);
 
 	return (score);
 }

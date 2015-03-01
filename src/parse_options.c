@@ -16,7 +16,7 @@
 
 static void	print_usage(void)
 {
-	ft_putendl("Usage : ./game_2048 [-whsbm]");
+	ft_putendl("Usage : ./game_2048 [-WHsbm]");
 }
 
 static void	print_error(int type, char *option, int def)
@@ -73,10 +73,10 @@ int			parse_options(t_2048 *game, int ac, char **av)
 	(void)game;
 	while (i < ac)
 	{
-		if (!ft_strcmp(av[i], "-w"))
-			set_number_value(&game->width, "-w", av[i + 1], DEFAULT_WIDTH);
-		else if (!ft_strcmp(av[i], "-h"))
-			set_number_value(&game->height, "-h", av[i + 1], DEFAULT_HEIGHT);
+		if (!ft_strcmp(av[i], "-W"))
+			set_number_value(&game->width, "-H", av[i + 1], DEFAULT_WIDTH);
+		else if (!ft_strcmp(av[i], "-H"))
+			set_number_value(&game->height, "-H", av[i + 1], DEFAULT_HEIGHT);
 		else if (!ft_strcmp(av[i], "-s"))
 			set_number_value(&game->seed, "-s", av[i + 1], time(NULL));
 		else if (!ft_strcmp(av[i], "-b"))

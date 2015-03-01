@@ -13,6 +13,7 @@
 #include <time.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <pwd.h>
 #include "libft.h"
 #include "wong.h"
 
@@ -43,9 +44,19 @@ static t_2048	*game_init(int ac, char **av)
 	return (game);
 }
 
-static void		game_end(void)
+static void		game_end(t_2048 *game)
 {
+	int				score;
+	struct passwd	*pw;
+
 	ncurses_handling(end);
+
+	score = get_last_highscore();
+
+	pw = getpwuid(geteuid());
+
+	if (game->score >= score)
+		highscores_add(pw->pw_name, game->score);
 }
 
 int		build_map(t_2048 *game)
@@ -81,16 +92,13 @@ int				main(int ac, char **av)
 	game = game_init(ac, av);
 
 	if (!game)
-	{
-		ft_putendl("ERROR.");
 		return (EXIT_FAILURE);
-	}
 
 	game_start(game);
 	// restore_save(game);
 
 	game_loop(game);
-	game_end();
+	game_end(game);
 
 	return (EXIT_SUCCESS);
 }
