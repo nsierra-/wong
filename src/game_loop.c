@@ -14,18 +14,22 @@
 #include "libft.h"
 #include "wong.h"
 
-static void	game_update(t_2048 *game, int ch)
+static int	game_update(t_2048 *game, int ch)
 {
+	int		ret;
+
+	ret = 0;
 	if (ch == -1 && !(game->running = 0))
-		return ;
-	if (ch == KEY_DOWN)
+		return (ret);
+	if (ch == KEY_DOWN && (ret = 1))
 		move_down(game);
-	else if (ch == KEY_UP)
+	else if (ch == KEY_UP && (ret = 1))
 		move_up(game);
-	else if (ch == KEY_LEFT)
+	else if (ch == KEY_LEFT && (ret = 1))
 		move_left(game);
-	else if (ch == KEY_RIGHT)
+	else if (ch == KEY_RIGHT && (ret = 1))
 		move_right(game);
+	return (ret);
 }
 
 static void	game_draw(t_2048 *game)
@@ -36,17 +40,21 @@ static void	game_draw(t_2048 *game)
 	set_max_case_size(game, &infos);
 	set_max_number_size(game, &infos);
 	set_case_spaces(game, &infos);
-	//is_valid(&infos);
 	draw_map(game, &infos);
 	draw_stats(game);
 }
 
 void		game_loop(t_2048 *game)
 {
+	int		valid_move;
+
+	valid_move = 0;
 	while (game->running)
 	{
-		game_update(game, ncurses_handle_input());
-		spawn_randomly(game);
 		game_draw(game);
+		valid_move = game_update(game, ncurses_handle_input());
+		game_draw(game);
+		if (valid_move)
+			spawn_randomly(game);
 	}
 }
