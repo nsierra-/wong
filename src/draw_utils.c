@@ -14,7 +14,7 @@
 #include "libft.h"
 #include "wong.h"
 
-int	get_number_size(uint num)
+int	get_number_size(int num)
 {
 	int		ret;
 
@@ -38,8 +38,8 @@ void		set_max_case_size(t_2048 *game, t_draw_infos *infos)
 
 void		set_max_number_size(t_2048 *game, t_draw_infos *infos)
 {
-	uint	x;
-	uint	y;
+	int	x;
+	int	y;
 	int		tmp;
 
 	y = 0;

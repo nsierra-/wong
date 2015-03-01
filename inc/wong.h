@@ -21,18 +21,16 @@
 # define				R_E_MALLOC			1
 # define				R_E_OPTION			2
 
-typedef unsigned int	uint;
-
 typedef struct			s_2048
 {
-	uint				width;
-	uint				height;
-	uint				score;
-	uint				**map;
-	uint				win_value;
-	uint				move_count;
-	uint				seed;
-	uint				base;
+	int				width;
+	int				height;
+	int				score;
+	int				**map;
+	int				win_value;
+	int				move_count;
+	int				seed;
+	int				base;
 	int					running;
 }						t_2048;
 
@@ -60,7 +58,7 @@ int			ncurses_handle_input(void);
 void		set_max_case_size(t_2048 *game, t_draw_infos *infos);
 void		set_max_number_size(t_2048 *game, t_draw_infos *infos);
 void		set_case_spaces(t_2048 *game, t_draw_infos *infos);
-int			get_number_size(uint num);
+int			get_number_size(int num);
 
 int			return_error(int error_code);
 void		print_map(t_2048 *game);

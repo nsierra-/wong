@@ -88,8 +88,8 @@ static void	draw_case(int x, int y, int value, t_draw_infos *infos)
 
 void		draw_map(t_2048 *game, t_draw_infos *infos)
 {
-	uint	x;
-	uint	y;
+	int	x;
+	int	y;
 
 	y = 0;
 	while (y < game->height)

@@ -17,10 +17,10 @@
 
 static int		build_map(t_2048 *game)
 {
-	uint	x;
-	uint	y;
+	int	x;
+	int	y;
 
-	game->map = malloc(sizeof(uint*) * game->height);
+	game->map = malloc(sizeof(int*) * game->height);
 
 	if (!game->map)
 		return (return_error(R_E_MALLOC));
@@ -28,7 +28,7 @@ static int		build_map(t_2048 *game)
 	y = 0;
 	while (y < game->height)
 	{
-		game->map[y] = malloc(sizeof(uint) * game->width);
+		game->map[y] = malloc(sizeof(int) * game->width);
 
 		if (!game->map[y])
 			return (return_error(R_E_MALLOC));

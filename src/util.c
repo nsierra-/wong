@@ -23,8 +23,8 @@ int        return_error(int error_code)
 
 void		print_map(t_2048 *game)
 {
-	uint	x;
-	uint	y;
+	int	x;
+	int	y;
 
 	y = 0;
 	while (y < game->height)
@@ -41,7 +41,7 @@ void		print_map(t_2048 *game)
 	}
 }
 
-static void	print_game_value(char *title, uint val)
+static void	print_game_value(char *title, int val)
 {
 	ft_putstr(title);
 	ft_putnbr(val);
