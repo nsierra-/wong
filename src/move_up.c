@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 22:45:19 by amaurer           #+#    #+#             */
-/*   Updated: 2015/02/28 23:35:28 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/03/01 03:53:53 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static int	slide_line_1(t_2048 *game, int x, int y)
 		return (-1);
 	if (game->map[result][x] == game->map[y][x])
 	{
+		game->score += game->map[result][x] * 2;
 		game->map[y][x] += game->map[result][x];
 		game->map[result][x] = 0;
 	}

@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 22:45:19 by amaurer           #+#    #+#             */
-/*   Updated: 2015/02/28 23:27:51 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/03/01 03:57:21 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int		next_number_index(int *line, int length)
 	return (-1);
 }
 
-static int	slide_line_0(int *line, int index)
+static int	slide_line_0(t_2048 *game, int *line, int index)
 {
 	int	result;
 
@@ -38,10 +38,10 @@ static int	slide_line_0(int *line, int index)
 	line[index] = line[result];
 	line[result] = 0;
 
-	return (slide_line_right(line, index));
+	return (slide_line_right(game, line, index));
 }
 
-static int	slide_line_1(int *line, int index)
+static int	slide_line_1(t_2048 *game, int *line, int index)
 {
 	int	result;
 
@@ -51,6 +51,7 @@ static int	slide_line_1(int *line, int index)
 		return (-1);
 	if (line[result] == line[index])
 	{
+		game->score += line[result] * 2;
 		line[index] += line[result];
 		line[result] = 0;
 	}
@@ -62,18 +63,18 @@ static int	slide_line_1(int *line, int index)
 			line[result] = 0;
 	}
 
-	return (slide_line_right(line, index - 1));
+	return (slide_line_right(game, line, index - 1));
 }
 
-int		slide_line_right(int *line, int index)
+int		slide_line_right(t_2048 *game, int *line, int index)
 {
 	if (index < 0)
 		return (-1);
 
 	if (line[index] == 0)
-		return slide_line_0(line, index);
+		return slide_line_0(game, line, index);
 	else
-		return slide_line_1(line, index);
+		return slide_line_1(game, line, index);
 
 }
 
@@ -84,7 +85,7 @@ void		move_right(t_2048 *game)
 	i = 0;
 	while (i < game->height)
 	{
-		slide_line_right(game->map[i], game->width - 1);
+		slide_line_right(game, game->map[i], game->width - 1);
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 20:43:20 by nsierra-          #+#    #+#             */
-/*   Updated: 2015/03/01 03:30:25 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/03/01 03:55:20 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ int			parse_options(t_2048 *game, int ac, char **av);
 int			build_map(t_2048 *game);
 int			game_start(t_2048 *game);
 int			spawn_value(t_2048 *game, int x, int y, int value);
-int			slide_line_right(int *line, int index);
-int			slide_line_left(int *line, int index, int length);
+int			slide_line_right(t_2048 *game, int *line, int index);
+int			slide_line_left(t_2048 *game, int *line, int index, int length);
 int			slide_line_up(t_2048 * game, int x, int y);
 int			slide_line_down(t_2048 * game, int x, int y);
 
