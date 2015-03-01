@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 22:00:44 by amaurer           #+#    #+#             */
-/*   Updated: 2015/03/01 02:15:51 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/03/01 03:49:25 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,5 @@ int		game_start(t_2048 *game)
 {
 	spawn_randomly(game);
 	spawn_randomly(game);
-
-	highscores_add("Dai", 545);
-
 	return (R_SUCCESS);
 }

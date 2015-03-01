@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 20:43:53 by nsierra-          #+#    #+#             */
-/*   Updated: 2015/02/28 23:32:36 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/03/01 03:52:07 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,36 +15,6 @@
 #include <stdlib.h>
 #include "libft.h"
 #include "wong.h"
-
-static int		build_map(t_2048 *game)
-{
-	int	x;
-	int	y;
-
-	game->map = malloc(sizeof(int*) * game->height);
-
-	if (!game->map)
-		return (return_error(R_E_MALLOC));
-
-	y = 0;
-	while (y < game->height)
-	{
-		game->map[y] = malloc(sizeof(int) * game->width);
-
-		if (!game->map[y])
-			return (return_error(R_E_MALLOC));
-
-		x = 0;
-		while (x < game->width)
-		{
-			game->map[y][x] = 0;
-			x++;
-		}
-		y++;
-	}
-
-	return (R_SUCCESS);
-}
 
 static t_2048	*game_init(int ac, char **av)
 {
@@ -84,6 +54,36 @@ static void		game_end(void)
 	ncurses_handling(end);
 }
 
+int		build_map(t_2048 *game)
+{
+	int	x;
+	int	y;
+
+	game->map = malloc(sizeof(int*) * game->height);
+
+	if (!game->map)
+		return (return_error(R_E_MALLOC));
+
+	y = 0;
+	while (y < game->height)
+	{
+		game->map[y] = malloc(sizeof(int) * game->width);
+
+		if (!game->map[y])
+			return (return_error(R_E_MALLOC));
+
+		x = 0;
+		while (x < game->width)
+		{
+			game->map[y][x] = 0;
+			x++;
+		}
+		y++;
+	}
+
+	return (R_SUCCESS);
+}
+
 int				main(int ac, char **av)
 {
 	t_2048	*game;
@@ -97,7 +97,8 @@ int				main(int ac, char **av)
 	}
 
 	game_start(game);
-	print_map(game);
+	// restore_save(game);
+
 	game_loop(game);
 	game_end();
 

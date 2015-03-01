@@ -6,7 +6,7 @@
 #    By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/03/02 08:22:33 by nsierra-          #+#    #+#              #
-#    Updated: 2015/03/01 01:39:43 by amaurer          ###   ########.fr        #
+#    Updated: 2015/03/01 03:30:52 by amaurer          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ SRC_FILES	=	main.c \
 				game_loop.c \
 				draw_utils.c \
 				draw_map.c \
-				draw_stats.c
+				draw_stats.c \
+				save.c
 
 SRC			=	$(addprefix src/, $(SRC_FILES))
 INC			=	$(addprefix inc/, $(INC_FILES))

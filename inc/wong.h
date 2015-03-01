@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 20:43:20 by nsierra-          #+#    #+#             */
-/*   Updated: 2015/03/01 02:14:33 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/03/01 03:30:25 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define				HIGHSCORES_FILE		"highscores.txt"
 # define				HIGHSCORES_COUNT	5
+# define				SAVE_FILE			"save.2048"
 # define				DEFAULT_BASE		2
 # define				DEFAULT_WIDTH		4
 # define				DEFAULT_HEIGHT		4
@@ -81,6 +82,7 @@ int			spawn_randomly(t_2048 *game);
 
 int			parse_options(t_2048 *game, int ac, char **av);
 
+int			build_map(t_2048 *game);
 int			game_start(t_2048 *game);
 int			spawn_value(t_2048 *game, int x, int y, int value);
 int			slide_line_right(int *line, int index);
@@ -96,5 +98,8 @@ void		move_down(t_2048 *game);
 int			highscores_add(char *name, int score);
 
 int			ft_nbrlen(int n);
+
+int			save(t_2048 *game);
+int			restore_save(t_2048 *game);
 
 #endif
