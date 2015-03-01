@@ -29,7 +29,7 @@ static t_2048	*game_init(int ac, char **av)
 	game->score = 0;
 	game->move_count = 0;
 	game->running = 1;
-
+	game->won = 0;
 	if (parse_options(game, ac, av))
 		return (NULL);
 	if (game->width == 0)
@@ -37,15 +37,9 @@ static t_2048	*game_init(int ac, char **av)
 	print_game(game);
 	if (build_map(game))
 		return (NULL);
-
 	ncurses_handling(init);
 	ncurses_handling(set_signal);
-
-	(void) ac;
-	(void) av;
-
 	srand(game->seed);
-
 	return (game);
 }
 
@@ -63,15 +57,12 @@ int		build_map(t_2048 *game)
 
 	if (!game->map)
 		return (return_error(R_E_MALLOC));
-
 	y = 0;
 	while (y < game->height)
 	{
 		game->map[y] = malloc(sizeof(int) * game->width);
-
 		if (!game->map[y])
 			return (return_error(R_E_MALLOC));
-
 		x = 0;
 		while (x < game->width)
 		{
@@ -80,7 +71,6 @@ int		build_map(t_2048 *game)
 		}
 		y++;
 	}
-
 	return (R_SUCCESS);
 }
 

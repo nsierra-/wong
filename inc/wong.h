@@ -39,6 +39,7 @@ typedef struct			s_2048
 	int					seed;
 	int					base;
 	int					running;
+	int					won;
 }						t_2048;
 
 typedef struct			s_draw_infos

@@ -22,5 +22,7 @@ void		draw_stats(t_2048 *game)
 	mvwaddstr(stdscr, LINES - 1, 0, "Score: ");
 	tmp = ft_itoa(game->score);
 	waddstr(stdscr, tmp);
+	if (game->won == 1)
+		waddstr(stdscr, " | You won !");
 	free(tmp);
 }

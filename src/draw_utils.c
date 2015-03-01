@@ -14,7 +14,7 @@
 #include "libft.h"
 #include "wong.h"
 
-int	get_number_size(int num)
+int			get_number_size(int num)
 {
 	int		ret;
 
@@ -38,8 +38,8 @@ void		set_max_case_size(t_2048 *game, t_draw_infos *infos)
 
 void		set_max_number_size(t_2048 *game, t_draw_infos *infos)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 	int		tmp;
 
 	y = 0;
@@ -50,7 +50,8 @@ void		set_max_number_size(t_2048 *game, t_draw_infos *infos)
 		while (x < game->width)
 		{
 			tmp = get_number_size(game->map[y][x]);
-			infos->max_number_size = tmp > infos->max_number_size ? tmp : infos->max_number_size;
+			infos->max_number_size = tmp > infos->max_number_size
+				? tmp : infos->max_number_size;
 			x++;
 		}
 		y++;
@@ -61,12 +62,7 @@ void		set_max_number_size(t_2048 *game, t_draw_infos *infos)
 void		set_case_spaces(t_2048 *game, t_draw_infos *infos)
 {
 	(void)game;
-	infos->case_hspace = (infos->max_case_width - infos->max_number_size - 2) / 2;
+	infos->case_hspace = (infos->max_case_width - infos->max_number_size - 2)
+		/ 2;
 	infos->case_vspace = (infos->max_case_height - 3) / 2;
 }
-
-/*
-
-(MAX - 1 - 2) / 2
-
-*/

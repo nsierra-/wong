@@ -44,6 +44,26 @@ static void	game_draw(t_2048 *game)
 	draw_stats(game);
 }
 
+static int	has_won(t_2048 *game)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < game->height)
+	{
+		x = 0;
+		while (x < game->width)
+		{
+			if (game->map[y][x] >= game->win_value)
+				return (1);
+			x++;
+		}
+		y++;
+	}
+	return (0);
+}
+
 void		game_loop(t_2048 *game)
 {
 	int		valid_move;
@@ -55,6 +75,14 @@ void		game_loop(t_2048 *game)
 		valid_move = game_update(game, ncurses_handle_input());
 		game_draw(game);
 		if (valid_move)
-			spawn_randomly(game);
+		{
+			if (spawn_randomly(game) == R_BOARD_FULL)
+			{
+				game->won = -1;
+				return ;
+			}
+		}
+		if (has_won(game))
+			game->won = 1;
 	}
 }

@@ -53,7 +53,7 @@ static void	draw_number_line(int x, int y, int value, t_draw_infos *infos)
 	int		j;
 	char	*tmp;
 
-	mvwaddch(stdscr, y, x++, '|');
+	mvwaddch(stdscr, y, x, '|');
 	i = 0;
 	while (i++ < infos->case_hspace)
 		waddch(stdscr, ' ');
@@ -64,9 +64,7 @@ static void	draw_number_line(int x, int y, int value, t_draw_infos *infos)
 	j = infos->max_number_size - get_number_size(value);
 	while (i++ < (infos->case_hspace + j))
 		waddch(stdscr, ' ');
-	if (infos->max_case_width % 2 == 0)
-		waddch(stdscr, ' ');
-	waddch(stdscr, '|');
+	mvwaddch(stdscr, y, x + infos->max_case_width - 1, '|');
 }
 
 static void	draw_case(int x, int y, int value, t_draw_infos *infos)
