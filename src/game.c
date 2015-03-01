@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 22:00:44 by amaurer           #+#    #+#             */
-/*   Updated: 2015/03/01 03:49:25 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/03/01 04:23:28 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	spawn_randomly(t_2048 *game)
 	if (i == 0)
 		return (return_error(R_BOARD_FULL));
 
-	random = rand() % (i - 1);
+	random = rand() % (i);
 
 	spawn_value(game, blocks[random][0], blocks[random][1], value);
 
@@ -113,5 +113,6 @@ int		game_start(t_2048 *game)
 {
 	spawn_randomly(game);
 	spawn_randomly(game);
+
 	return (R_SUCCESS);
 }

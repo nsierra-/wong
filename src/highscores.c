@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/28 23:40:37 by amaurer           #+#    #+#             */
-/*   Updated: 2015/03/01 02:15:21 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/03/01 04:24:28 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,4 +103,32 @@ int		highscores_add(char *name, int score)
 	close(fd);
 
 	return (R_SUCCESS);
+}
+
+int		get_last_highscore(void)
+{
+	char	*line;
+	char	*tmp;
+	int		fd;
+	int		score;
+
+	fd = open(HIGHSCORES_FILE, O_RDONLY);
+
+	if (fd == -1)
+		return (0);
+
+	tmp = NULL;
+	while (get_next_line(fd, &line) > 0)
+	{
+		if (!tmp)
+			free(tmp);
+		tmp = line;
+	}
+
+	close(fd);
+
+	score = ft_atoi(tmp);
+	free(tmp);
+
+	return (score);
 }
