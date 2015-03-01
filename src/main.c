@@ -92,6 +92,5 @@ int					main(int ac, char **av)
 	game_end(game);
 	if (game->won == -1)
 		ft_putendl("\nYou lost.");
-	while(1);
 	return (EXIT_SUCCESS);
 }

@@ -68,7 +68,7 @@ int			highscores_add(char *name, int score, int i)
 	scores = highscores_load();
 	if (!(fd = open(HIGHSCORES_FILE, O_WRONLY | O_CREAT)))
 		return (R_E_FILE);
-	while (i < HIGHSCORES_COUNT - 1)
+	while (i < HIGHSCORES_COUNT - 1 || (i = 0))
 	{
 		if (score > 0 && (!scores[i] || score > ft_atoi(scores[i])))
 		{
@@ -81,43 +81,12 @@ int			highscores_add(char *name, int score, int i)
 			ft_putendl_fd(scores[i], fd);
 		++i;
 	}
-	i = 0;
+	close(fd);
 	while (scores[i])
 		free(scores[i++]);
 	free(scores);
-	close(fd);
 	return (R_SUCCESS);
 }
-
-// int			highscores_add(char *name, int score, int i)
-// {
-// 	char	**scores;
-// 	int		fd;
-// 	char	*tmp;
-
-// 	scores = highscores_load();
-// 	if (!(fd = open(HIGHSCORES_FILE, O_WRONLY | O_CREAT)))
-// 		return (R_E_FILE);
-// 	while (i < HIGHSCORES_COUNT - 1)
-// 	{
-// 		if (score > 0 && (!scores[i] || score > ft_atoi(scores[i])))
-// 		{
-// 			tmp = build_highscore_line(name, score);
-// 			ft_putendl_fd(tmp, fd);
-// 			free(tmp);
-// 			score = -1;
-// 		}
-// 		if (scores[i])
-// 		{
-// 			ft_putendl_fd(scores[i], fd);
-// 			free(scores[i]);
-// 		}
-// 		++i;
-// 	}
-// 	free(scores);
-// 	close(fd);
-// 	return (R_SUCCESS);
-// }
 
 int			get_last_highscore(void)
 {
