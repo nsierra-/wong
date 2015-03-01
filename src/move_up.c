@@ -82,6 +82,7 @@ void		move_up(t_2048 *game)
 	int	x;
 
 	x = 0;
+	exit(0);
 	while (x < game->height)
 	{
 		slide_line_up(game, x, 0);
