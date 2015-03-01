@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 20:43:20 by nsierra-          #+#    #+#             */
-/*   Updated: 2015/03/01 03:55:20 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/03/01 04:23:20 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void		move_up(t_2048 *game);
 void		move_down(t_2048 *game);
 
 int			highscores_add(char *name, int score);
+int			get_last_highscore(void);
 
 int			ft_nbrlen(int n);
 
