@@ -46,6 +46,7 @@ void		game_loop(t_2048 *game)
 	while (game->running)
 	{
 		game_update(game, ncurses_handle_input());
+		spawn_randomly(game);
 		game_draw(game);
 	}
 }

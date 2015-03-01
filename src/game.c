@@ -79,7 +79,7 @@ static int	**get_free_blocks(t_2048 *game, int *i)
 	return (blocks);
 }
 
-static int	spawn_randomly(t_2048 *game)
+int	spawn_randomly(t_2048 *game)
 {
 	int	value;
 	int	i;

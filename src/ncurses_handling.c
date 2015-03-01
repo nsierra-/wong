@@ -26,32 +26,36 @@ void		ncurses_handling(t_ncurses_action action)
 	if (action == init)
 	{
 		initscr();
-		nocbreak();
+		cbreak();
 		noecho();
-		nodelay(stdscr, TRUE);
+		keypad(stdscr, TRUE);
 	}
 	else if (action == set_signal)
 		signal(SIGWINCH, ncurses_resize);
 	else if (action == end)
 	{
-		refresh();
 		endwin();
+		refresh();
+		clear();
 	}
 	else if (action == refresh_screen)
 		refresh();
-		
 }
 
 int			ncurses_handle_input(void)
 {
 	int		ch;
 
-	cbreak();
 	ch = getch();
 	if (ch == 27)
 	{
+		nodelay(stdscr, TRUE);
 		if (getch() == ERR)
+		{
+			nodelay(stdscr, FALSE);
 			return (-1);
+		}
+		nodelay(stdscr, FALSE);
 	}
 	else if (ch == ERR)
 		ch = 0;

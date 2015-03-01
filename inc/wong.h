@@ -77,6 +77,8 @@ void		draw_stats(t_2048 *game);
 
 void		game_loop(t_2048 *game);
 
+int			spawn_randomly(t_2048 *game);
+
 int			parse_options(t_2048 *game, int ac, char **av);
 
 int			game_start(t_2048 *game);

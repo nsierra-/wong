@@ -64,6 +64,8 @@ static void	draw_number_line(int x, int y, int value, t_draw_infos *infos)
 	j = infos->max_number_size - get_number_size(value);
 	while (i++ < (infos->case_hspace + j))
 		waddch(stdscr, ' ');
+	if (infos->max_case_width % 2 == 0)
+		waddch(stdscr, ' ');
 	waddch(stdscr, '|');
 }
 
