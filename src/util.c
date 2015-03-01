@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 21:22:19 by amaurer           #+#    #+#             */
-/*   Updated: 2015/02/28 23:27:44 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/03/01 01:49:40 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,19 @@ void		print_map(t_2048 *game)
 		y++;
 	}
 	ft_putchar('\n');
+}
+
+int			ft_nbrlen(int n)
+{
+	size_t	i;
+
+	if (!n)
+		return (1);
+	i = (n < 0) ? 1 : 0;
+	while (n)
+	{
+		i++;
+		n /= 10;
+	}
+	return (i);
 }

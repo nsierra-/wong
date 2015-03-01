@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 22:00:44 by amaurer           #+#    #+#             */
-/*   Updated: 2015/02/28 23:34:08 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/03/01 02:15:51 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,103 +24,97 @@ int		spawn_value(t_2048 *game, int x, int y, int value)
 	return (R_SUCCESS);
 }
 
-// static int	get_free_block_count(t_2048 *game)
-// {
-// 	int	y;
-// 	int	x;
-// 	int	i;
+static int	get_free_block_count(t_2048 *game)
+{
+	int	y;
+	int	x;
+	int	i;
 
-// 	i = 0;
-// 	y = 0;
-// 	while (y < game->height)
-// 	{
-// 		x = 0;
-// 		while (x < game->width)
-// 		{
-// 			if (game->map[y][x] == 0)
-// 				i++;
-// 			x++;
-// 		}
-// 		y++;
-// 	}
+	i = 0;
+	y = 0;
+	while (y < game->height)
+	{
+		x = 0;
+		while (x < game->width)
+		{
+			if (game->map[y][x] == 0)
+				i++;
+			x++;
+		}
+		y++;
+	}
 
-// 	return (i);
-// }
+	return (i);
+}
 
-// static int	**get_free_blocks(t_2048 *game, int *i)
-// {
-// 	int	**blocks;
-// 	int	y;
-// 	int	x;
+static int	**get_free_blocks(t_2048 *game, int *i)
+{
+	int	**blocks;
+	int	y;
+	int	x;
 
-// 	blocks = malloc(sizeof(int*) * get_free_block_count(game) + 1);
+	blocks = malloc(sizeof(int*) * get_free_block_count(game) + 1);
 
-// 	*i = 0;
-// 	y = 0;
-// 	while (y < game->height)
-// 	{
-// 		x = 0;
-// 		while (x < game->width)
-// 		{
-// 			if (game->map[y][x] == 0)
-// 			{
-// 				blocks[*i] = malloc(sizeof(int) * 2);
-// 				blocks[*i][0] = x;
-// 				blocks[*i][1] = y;
-// 				(*i)++;
-// 			}
-// 			x++;
-// 		}
-// 		y++;
-// 	}
+	*i = 0;
+	y = 0;
+	while (y < game->height)
+	{
+		x = 0;
+		while (x < game->width)
+		{
+			if (game->map[y][x] == 0)
+			{
+				blocks[*i] = malloc(sizeof(int) * 2);
+				blocks[*i][0] = x;
+				blocks[*i][1] = y;
+				(*i)++;
+			}
+			x++;
+		}
+		y++;
+	}
 
-// 	blocks[*i] = NULL;
+	blocks[*i] = NULL;
 
-// 	return (blocks);
-// }
+	return (blocks);
+}
 
-// static int	spawn_randomly(t_2048 *game)
-// {
-// 	int	value;
-// 	int	i;
-// 	int	**blocks;
-// 	int	random;
-// 	int	j;
+static int	spawn_randomly(t_2048 *game)
+{
+	int	value;
+	int	i;
+	int	**blocks;
+	int	random;
+	int	j;
 
-// 	if (rand() % 3 != 0)
-// 		value = game->base;
-// 	else
-// 		value = game->base * game->base;
+	if (rand() % 3 != 0)
+		value = game->base;
+	else
+		value = game->base * game->base;
 
-// 	blocks = get_free_blocks(game, &i);
+	blocks = get_free_blocks(game, &i);
 
-// 	if (i == 0)
-// 		return (return_error(R_BOARD_FULL));
+	if (i == 0)
+		return (return_error(R_BOARD_FULL));
 
-// 	random = rand() % (i - 1);
+	random = rand() % (i - 1);
 
-// 	spawn_value(game, blocks[random][0], blocks[random][1], value);
+	spawn_value(game, blocks[random][0], blocks[random][1], value);
 
-// 	j = 0;
-// 	while (j < i)
-// 		free(blocks[j++]);
-// 	free(blocks);
+	j = 0;
+	while (j < i)
+		free(blocks[j++]);
+	free(blocks);
 
-// 	return (R_SUCCESS);
-// }
+	return (R_SUCCESS);
+}
 
 int		game_start(t_2048 *game)
 {
-	// spawn_randomly(game);
-	// spawn_randomly(game);
-	spawn_value(game, 0, 0, 4);
-	spawn_value(game, 0, 1, 4);
-	spawn_value(game, 0, 2, 4);
-	spawn_value(game, 0, 3, 4);
+	spawn_randomly(game);
+	spawn_randomly(game);
 
-	print_map(game);
-
-	move_up(game);
+	highscores_add("Dai", 545);
 
 	return (R_SUCCESS);
 }

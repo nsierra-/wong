@@ -6,7 +6,7 @@
 #    By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/03/02 08:22:33 by nsierra-          #+#    #+#              #
-#    Updated: 2015/02/28 23:20:21 by amaurer          ###   ########.fr        #
+#    Updated: 2015/03/01 01:39:43 by amaurer          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,9 @@ SRC_FILES	=	main.c \
 				move_right.c \
 				move_left.c \
 				move_up.c \
-				move_down.c
+				move_down.c \
+				highscores.c \
+				get_next_line.c
 
 SRC			=	$(addprefix src/, $(SRC_FILES))
 INC			=	$(addprefix inc/, $(INC_FILES))
