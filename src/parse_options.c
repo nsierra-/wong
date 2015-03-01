@@ -74,15 +74,15 @@ int			parse_options(t_2048 *game, int ac, char **av)
 	while (i < ac)
 	{
 		if (!ft_strcmp(av[i], "-w"))
-			set_number_value((int *)&game->width, "-w", av[i + 1], DEFAULT_WIDTH);
+			set_number_value(&game->width, "-w", av[i + 1], DEFAULT_WIDTH);
 		else if (!ft_strcmp(av[i], "-h"))
-			set_number_value((int *)&game->height, "-h", av[i + 1], DEFAULT_HEIGHT);
+			set_number_value(&game->height, "-h", av[i + 1], DEFAULT_HEIGHT);
 		else if (!ft_strcmp(av[i], "-s"))
-			set_number_value((int *)&game->seed, "-s", av[i + 1], time(NULL));
+			set_number_value(&game->seed, "-s", av[i + 1], time(NULL));
 		else if (!ft_strcmp(av[i], "-b"))
-			set_number_value((int *)&game->base, "-b", av[i + 1], DEFAULT_BASE);
+			set_number_value(&game->base, "-b", av[i + 1], DEFAULT_BASE);
 		else if (!ft_strcmp(av[i], "-m"))
-			set_number_value((int *)&game->win_value, "-m", av[i + 1], DEFAULT_WIN_VALUE);
+			set_number_value(&game->win_value, "-m", av[i + 1], DEFAULT_WIN_VALUE);
 		else
 		{
 			print_usage();

@@ -51,11 +51,18 @@ static t_2048	*game_init(int ac, char **av)
 	t_2048	*game;
 
 	game = malloc(sizeof(t_2048));
+	game->width = DEFAULT_WIDTH;
+	game->height = DEFAULT_HEIGHT;
+	game->win_value = DEFAULT_WIN_VALUE;
+	game->seed = time(NULL);
+	game->base = DEFAULT_BASE;
 	game->score = 0;
 	game->move_count = 0;
 	game->running = 1;
 
 	if (parse_options(game, ac, av))
+		return (NULL);
+	if (game->width == 0)
 		return (NULL);
 	print_game(game);
 	if (build_map(game))
