@@ -27,8 +27,7 @@ SRC_FILES	=	main.c \
 				game_loop.c \
 				draw_utils.c \
 				draw_map.c \
-				draw_stats.c \
-				save.c
+				draw_stats.c
 
 SRC			=	$(addprefix src/, $(SRC_FILES))
 INC			=	$(addprefix inc/, $(INC_FILES))

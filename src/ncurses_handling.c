@@ -17,7 +17,9 @@
 void		ncurses_resize(int sigwinch)
 {
 	(void)sigwinch;
-	ncurses_handling(end);
+	endwin();
+	refresh();
+	clear();
 	ncurses_handling(init);
 	waddstr(stdscr, "Press any key...");
 }
@@ -29,16 +31,13 @@ void		ncurses_handling(t_ncurses_action action)
 		initscr();
 		cbreak();
 		noecho();
+		curs_set(0);
 		keypad(stdscr, TRUE);
 	}
 	else if (action == set_signal)
 		signal(SIGWINCH, ncurses_resize);
 	else if (action == end)
-	{
 		endwin();
-		refresh();
-		clear();
-	}
 	else if (action == refresh_screen)
 		refresh();
 }

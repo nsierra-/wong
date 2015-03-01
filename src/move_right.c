@@ -22,31 +22,26 @@ static int		next_number_index(int *line, int length)
 			return (length);
 		length--;
 	}
-
 	return (-1);
 }
 
-static int	slide_line_0(t_2048 *game, int *line, int index)
+static int		slide_line_0(t_2048 *game, int *line, int index)
 {
-	int	result;
+	int			result;
 
 	result = next_number_index(line, index - 1);
-
 	if (result == -1)
 		return (-1);
-
 	line[index] = line[result];
 	line[result] = 0;
-
 	return (slide_line_right(game, line, index));
 }
 
-static int	slide_line_1(t_2048 *game, int *line, int index)
+static int		slide_line_1(t_2048 *game, int *line, int index)
 {
-	int	result;
+	int			result;
 
 	result = next_number_index(line, index - 1);
-
 	if (result == -1)
 		return (-1);
 	if (line[result] == line[index])
@@ -58,29 +53,25 @@ static int	slide_line_1(t_2048 *game, int *line, int index)
 	else
 	{
 		line[index - 1] = line[result];
-
 		if (index - 1 != result)
 			line[result] = 0;
 	}
-
 	return (slide_line_right(game, line, index - 1));
 }
 
-int		slide_line_right(t_2048 *game, int *line, int index)
+int				slide_line_right(t_2048 *game, int *line, int index)
 {
 	if (index < 0)
 		return (-1);
-
 	if (line[index] == 0)
-		return slide_line_0(game, line, index);
+		return (slide_line_0(game, line, index));
 	else
-		return slide_line_1(game, line, index);
-
+		return (slide_line_1(game, line, index));
 }
 
-void		move_right(t_2048 *game)
+void			move_right(t_2048 *game)
 {
-	int	i;
+	int			i;
 
 	i = 0;
 	while (i < game->height)

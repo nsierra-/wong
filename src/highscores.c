@@ -18,70 +18,56 @@
 
 static char	**highscores_load(void)
 {
-	char	**scores = { NULL };
+	char	**scores;
 	int		fd;
 	char	*line;
 	int		i;
 
 	scores = malloc(sizeof(char*) * HIGHSCORES_COUNT);
-
 	if (!scores)
 		return (NULL);
-
 	i = 0;
 	while (i < HIGHSCORES_COUNT)
 	{
 		scores[i] = NULL;
 		i++;
 	}
-
 	fd = open(HIGHSCORES_FILE, O_RDONLY);
-
 	if (fd == -1)
 		return (scores);
-
 	i = 0;
 	while (get_next_line(fd, &line) > 0 && i < HIGHSCORES_COUNT)
 	{
 		scores[i] = line;
-		i++;
+		++i;
 	}
-
 	close(fd);
-
 	return (scores);
 }
 
 static char	*build_highscore_line(char *name, int score)
 {
 	char	*out;
+	char	*tmp;
 
+	tmp = ft_itoa(score);
 	out = malloc(sizeof(char*) * (ft_strlen(name) + 2 + ft_nbrlen(score)));
-	out = ft_strcat(out, ft_itoa(score));
+	out = ft_strcat(out, tmp);
 	out = ft_strcat(out, " ");
 	out = ft_strcat(out, name);
-
+	free(tmp);
 	return (out);
 }
 
-int		highscores_add(char *name, int score)
+int			highscores_add(char *name, int score, int i)
 {
 	char	**scores;
-	int		i;
 	int		fd;
 	char	*tmp;
 
 	scores = highscores_load();
-
-	if (!scores)
-		return (return_error(R_E_MALLOC));
-
-	fd = open(HIGHSCORES_FILE, O_WRONLY | O_CREAT);
-
-	if (!fd)
+	if (!(fd = open(HIGHSCORES_FILE, O_WRONLY | O_CREAT)))
 		return (R_E_FILE);
-
-	i = 0;
 	while (i < HIGHSCORES_COUNT - 1)
 	{
 		if (score > 0 && (!scores[i] || score > ft_atoi(scores[i])))
@@ -91,21 +77,18 @@ int		highscores_add(char *name, int score)
 			free(tmp);
 			score = -1;
 		}
-
 		if (scores[i])
 		{
 			ft_putendl_fd(scores[i], fd);
 			free(scores[i]);
 		}
-		i++;
+		++i;
 	}
-
 	close(fd);
-
 	return (R_SUCCESS);
 }
 
-int		get_last_highscore(void)
+int			get_last_highscore(void)
 {
 	char	*line;
 	char	*tmp;
@@ -114,10 +97,8 @@ int		get_last_highscore(void)
 	int		i;
 
 	fd = open(HIGHSCORES_FILE, O_RDONLY);
-
 	if (fd == -1)
 		return (0);
-
 	tmp = NULL;
 	i = 0;
 	while (get_next_line(fd, &line) > 0)
@@ -127,14 +108,10 @@ int		get_last_highscore(void)
 		tmp = line;
 		i++;
 	}
-
 	close(fd);
-
 	score = ft_atoi(tmp);
 	free(tmp);
-
 	if (i < HIGHSCORES_COUNT)
 		return (0);
-
 	return (score);
 }

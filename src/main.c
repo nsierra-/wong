@@ -17,9 +17,9 @@
 #include "libft.h"
 #include "wong.h"
 
-static t_2048	*game_init(int ac, char **av)
+static t_2048		*game_init(int ac, char **av)
 {
-	t_2048	*game;
+	t_2048			*game;
 
 	game = malloc(sizeof(t_2048));
 	game->width = DEFAULT_WIDTH;
@@ -35,7 +35,6 @@ static t_2048	*game_init(int ac, char **av)
 		return (NULL);
 	if (game->width == 0)
 		return (NULL);
-	print_game(game);
 	if (build_map(game))
 		return (NULL);
 	ncurses_handling(init);
@@ -44,28 +43,24 @@ static t_2048	*game_init(int ac, char **av)
 	return (game);
 }
 
-static void		game_end(t_2048 *game)
+static void			game_end(t_2048 *game)
 {
 	int				score;
 	struct passwd	*pw;
 
 	ncurses_handling(end);
-
 	score = get_last_highscore();
-
 	pw = getpwuid(geteuid());
-
 	if (game->score >= score)
-		highscores_add(pw->pw_name, game->score);
+		highscores_add(pw->pw_name, game->score, 0);
 }
 
-int		build_map(t_2048 *game)
+int					build_map(t_2048 *game)
 {
-	int	x;
-	int	y;
+	int				x;
+	int				y;
 
 	game->map = malloc(sizeof(int*) * game->height);
-
 	if (!game->map)
 		return (return_error(R_E_MALLOC));
 	y = 0;
@@ -85,20 +80,17 @@ int		build_map(t_2048 *game)
 	return (R_SUCCESS);
 }
 
-int				main(int ac, char **av)
+int					main(int ac, char **av)
 {
-	t_2048	*game;
+	t_2048			*game;
 
 	game = game_init(ac, av);
-
 	if (!game)
 		return (EXIT_FAILURE);
-
 	game_start(game);
-	// restore_save(game);
-
 	game_loop(game);
 	game_end(game);
-
+	if (game->won == -1)
+		ft_putendl("\nYou lose.");
 	return (EXIT_SUCCESS);
 }

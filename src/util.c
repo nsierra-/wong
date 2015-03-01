@@ -14,17 +14,17 @@
 #include <libft.h>
 #include <wong.h>
 
-int        return_error(int error_code)
+int			return_error(int error_code)
 {
-    if (error_code == R_E_MALLOC)
-        ft_putendl("Malloc error");
-    return (error_code);
+	if (error_code == R_E_MALLOC)
+		ft_putendl("Malloc error");
+	return (error_code);
 }
 
 void		print_map(t_2048 *game)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 
 	y = 0;
 	while (y < game->height)
