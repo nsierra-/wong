@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 20:43:53 by nsierra-          #+#    #+#             */
-/*   Updated: 2015/03/01 04:24:41 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/03/01 08:07:02 by nsierra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int					main(int ac, char **av)
 	game_loop(game);
 	game_end(game);
 	if (game->won == -1)
-		ft_putendl("\nYou lose.");
+		ft_putendl("\nYou lost.");
+	while(1);
 	return (EXIT_SUCCESS);
 }

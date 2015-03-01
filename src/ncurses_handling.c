@@ -31,6 +31,10 @@ void		ncurses_handling(t_ncurses_action action)
 		initscr();
 		cbreak();
 		noecho();
+		start_color();
+		init_pair(0, COLOR_WHITE, COLOR_BLACK);
+		init_pair(1, COLOR_RED, COLOR_BLACK);
+		init_pair(2, COLOR_BLUE, COLOR_BLACK);
 		curs_set(0);
 		keypad(stdscr, TRUE);
 	}

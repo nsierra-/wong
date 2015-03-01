@@ -23,9 +23,9 @@ static void	draw_sep_line(int x, int y, t_draw_infos *infos)
 	while (i < infos->max_case_width)
 	{
 		if (i == 0 || i == infos->max_case_width - 1)
-			mvwaddch(stdscr, y, x, '|');
+			mvwaddch(stdscr, y, x, '*' | COLOR_PAIR(2));
 		else
-			mvwaddch(stdscr, y, x, '-');
+			mvwaddch(stdscr, y, x, '~' | COLOR_PAIR(2));
 		++x;
 		++i;
 	}
@@ -39,7 +39,7 @@ static void	draw_white_line(int x, int y, t_draw_infos *infos)
 	while (i < infos->max_case_width)
 	{
 		if (i == 0 || i == infos->max_case_width - 1)
-			mvwaddch(stdscr, y, x, '|');
+			mvwaddch(stdscr, y, x, '|' | COLOR_PAIR(2));
 		else
 			mvwaddch(stdscr, y, x, ' ');
 		++x;
@@ -53,21 +53,23 @@ static void	draw_number_line(int x, int y, int value, t_draw_infos *infos)
 	int		j;
 	char	*tmp;
 
-	mvwaddch(stdscr, y, x, '|');
+	mvwaddch(stdscr, y, x, '|' | COLOR_PAIR(2));
 	i = 0;
 	while (i++ < infos->case_hspace)
 		waddch(stdscr, ' ');
+	i = 0;
 	if (value > 0)
 	{
 		tmp = ft_itoa(value);
-		waddstr(stdscr, tmp);
+		while (tmp[i] != '\0')
+			waddch(stdscr, tmp[i++] | COLOR_PAIR(1));
 		free(tmp);
 	}
 	i = 0;
 	j = infos->max_number_size - get_number_size(value);
 	while (i++ < (infos->case_hspace + j))
 		waddch(stdscr, ' ');
-	mvwaddch(stdscr, y, x + infos->max_case_width - 1, '|');
+	mvwaddch(stdscr, y, x + infos->max_case_width - 1, '|' | COLOR_PAIR(2));
 }
 
 static void	draw_case(int x, int y, int value, t_draw_infos *infos)

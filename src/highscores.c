@@ -23,11 +23,11 @@ static char	**highscores_load(void)
 	char	*line;
 	int		i;
 
-	scores = malloc(sizeof(char*) * HIGHSCORES_COUNT);
+	scores = malloc(sizeof(char*) * HIGHSCORES_COUNT + 1);
 	if (!scores)
 		return (NULL);
 	i = 0;
-	while (i < HIGHSCORES_COUNT)
+	while (i <= HIGHSCORES_COUNT)
 	{
 		scores[i] = NULL;
 		i++;
@@ -36,7 +36,7 @@ static char	**highscores_load(void)
 	if (fd == -1)
 		return (scores);
 	i = 0;
-	while (get_next_line(fd, &line) > 0 && i < HIGHSCORES_COUNT)
+	while (i < HIGHSCORES_COUNT && get_next_line(fd, &line) > 00)
 	{
 		scores[i] = line;
 		++i;
@@ -78,15 +78,46 @@ int			highscores_add(char *name, int score, int i)
 			score = -1;
 		}
 		if (scores[i])
-		{
 			ft_putendl_fd(scores[i], fd);
-			free(scores[i]);
-		}
 		++i;
 	}
+	i = 0;
+	while (scores[i])
+		free(scores[i++]);
+	free(scores);
 	close(fd);
 	return (R_SUCCESS);
 }
+
+// int			highscores_add(char *name, int score, int i)
+// {
+// 	char	**scores;
+// 	int		fd;
+// 	char	*tmp;
+
+// 	scores = highscores_load();
+// 	if (!(fd = open(HIGHSCORES_FILE, O_WRONLY | O_CREAT)))
+// 		return (R_E_FILE);
+// 	while (i < HIGHSCORES_COUNT - 1)
+// 	{
+// 		if (score > 0 && (!scores[i] || score > ft_atoi(scores[i])))
+// 		{
+// 			tmp = build_highscore_line(name, score);
+// 			ft_putendl_fd(tmp, fd);
+// 			free(tmp);
+// 			score = -1;
+// 		}
+// 		if (scores[i])
+// 		{
+// 			ft_putendl_fd(scores[i], fd);
+// 			free(scores[i]);
+// 		}
+// 		++i;
+// 	}
+// 	free(scores);
+// 	close(fd);
+// 	return (R_SUCCESS);
+// }
 
 int			get_last_highscore(void)
 {
@@ -96,14 +127,15 @@ int			get_last_highscore(void)
 	int		score;
 	int		i;
 
-	fd = open(HIGHSCORES_FILE, O_RDONLY);
-	if (fd == -1)
+	if ((fd = open(HIGHSCORES_FILE, O_RDONLY)) == -1)
 		return (0);
 	tmp = NULL;
 	i = 0;
-	while (get_next_line(fd, &line) > 0)
+	while (1)
 	{
-		if (!tmp)
+		if (get_next_line(fd, &line) <= 0)
+			break ;
+		if (tmp)
 			free(tmp);
 		tmp = line;
 		i++;

@@ -19,7 +19,6 @@
 # define DEFAULT_BASE 2
 # define DEFAULT_WIDTH 4
 # define DEFAULT_HEIGHT 4
-# define DEFAULT_WIN_VALUE 2048
 # define R_SUCCESS 0
 # define R_E_MALLOC 1
 # define R_E_BAD_COORD 2
@@ -27,6 +26,11 @@
 # define R_E_OPTION 4
 # define R_BOARD_FULL 5
 # define BUFF_SIZE 512
+
+enum					e_const
+{
+	DEFAULT_WIN_VALUE = 2048
+};
 
 typedef struct			s_2048
 {

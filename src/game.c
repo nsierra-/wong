@@ -86,8 +86,13 @@ int			spawn_randomly(t_2048 *game)
 	else
 		value = game->base * game->base;
 	blocks = get_free_blocks(game, &i);
-	if (i == 0)
+	if (i == 0 && !(j = 0))
+	{
+		while (j < i)
+			free(blocks[j++]);
+		free(blocks);
 		return (return_error(R_BOARD_FULL));
+	}
 	random = rand() % (i);
 	spawn_value(game, blocks[random][0], blocks[random][1], value);
 	j = 0;
