@@ -56,3 +56,21 @@ int			ft_nbrlen(int n)
 	}
 	return (i);
 }
+
+static void	print_game_value(char *title, int val)
+{
+	ft_putstr(title);
+	ft_putnbr(val);
+	ft_putendl("");
+}
+
+void		print_game(t_2048 *game)
+{
+	print_game_value("width: ", game->width);
+	print_game_value("height: ", game->height);
+	print_game_value("score: ", game->score);
+	print_game_value("win value: ", game->win_value);
+	print_game_value("move_count: ", game->move_count);
+	print_game_value("seed: ", game->seed);
+	print_game_value("base: ", game->base);
+}

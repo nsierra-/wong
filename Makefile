@@ -22,7 +22,12 @@ SRC_FILES	=	main.c \
 				move_up.c \
 				move_down.c \
 				highscores.c \
-				get_next_line.c
+				get_next_line.c \
+				parse_options.c \
+				game_loop.c \
+				draw_utils.c \
+				draw_map.c \
+				draw_stats.c
 
 SRC			=	$(addprefix src/, $(SRC_FILES))
 INC			=	$(addprefix inc/, $(INC_FILES))

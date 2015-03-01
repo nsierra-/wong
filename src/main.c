@@ -51,18 +51,18 @@ static t_2048	*game_init(int ac, char **av)
 	t_2048	*game;
 
 	game = malloc(sizeof(t_2048));
-	game->width = DEFAULT_WIDTH;
-	game->height = DEFAULT_HEIGHT;
-	game->win_value = DEFAULT_WIN_VALUE;
 	game->score = 0;
 	game->move_count = 0;
-	game->seed = time(NULL);
-	game->base = DEFAULT_BASE;
+	game->running = 1;
 
+	if (parse_options(game, ac, av))
+		return (NULL);
+	print_game(game);
 	if (build_map(game))
 		return (NULL);
 
-	// ncurses_handling(init);
+	ncurses_handling(init);
+	ncurses_handling(set_signal);
 
 	(void) ac;
 	(void) av;
@@ -72,10 +72,10 @@ static t_2048	*game_init(int ac, char **av)
 	return (game);
 }
 
-// static void		game_end(void)
-// {
-// 	ncurses_handling(end);
-// }
+static void		game_end(void)
+{
+	ncurses_handling(end);
+}
 
 int				main(int ac, char **av)
 {
@@ -91,8 +91,8 @@ int				main(int ac, char **av)
 
 	game_start(game);
 	print_map(game);
-
-	// game_end();
+	game_loop(game);
+	game_end();
 
 	return (EXIT_SUCCESS);
 }
